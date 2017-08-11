@@ -44,6 +44,8 @@ class DayAndNight {
 
         JDateChooser selectDate = new JDateChooser(); // All the buttons and checkboxes are created here.
         JButton selectButton = new JButton("Enter");
+        selectButton.setBackground(Color.GREEN);
+        selectButton.setOpaque(true);
         JButton currentButton = new JButton("Current");
         JCheckBox refresh = new JCheckBox("Update Automatically");
         JCheckBox animateRefresh = new JCheckBox("Animate Automatically");
@@ -67,11 +69,11 @@ class DayAndNight {
         panel.add(new JLabel("Minute"));
         panel.add(seconds);
         panel.add(new JLabel("Seconds"));
+        panel.add(selectButton);
         panel.add(animate);
         panel.add(animateRefresh);
         panel.add(currentButton);
         panel.add(refresh);
-        panel.add(selectButton);
         pane.add(panel, BorderLayout.SOUTH); // This container pane has all the buttons, checkboxes and Text field. It's at the south of the frame.
         pane.add(thumb, BorderLayout.CENTER); // This is the image, which is set to be on the center.
 
@@ -83,14 +85,20 @@ class DayAndNight {
         while(true) { // The loop used to detect if the checkboxes are clicked.
 
             if (changeDate.checkAuto) { // Checks the boolean value for the update automatically checkbox.
+
                 currentButton.doClick(); // Performs a click action for the current button.
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
             }
             if (changeDate.checkAnimate) { // Checks the boolean value for the animate automatically checkbox.
                 animate.doClick(); // // Performs a click action for the animate button.
             }
             else
             {
-                System.out.println("check auto is" + changeDate.checkAuto);
+                System.out.println("check auto is " + changeDate.checkAuto);
 
             }
 
