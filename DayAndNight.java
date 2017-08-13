@@ -4,10 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+
 
 class DayAndNight {
 
@@ -22,24 +25,27 @@ class DayAndNight {
         JFrame frame = new JFrame("Day and Night of Earth"); // Title
         Container pane = frame.getContentPane();
 
+        try { // This makes sure that the image is unchanged.
+            finImg = ImageIO.read(new FileInputStream("resources/land_shallow_topo_2048.jpg/"));
+        } catch (IOException err) {
+            err.printStackTrace();
 
-        finImg = ImageIO.read(new File("/Users/shafihaque/IdeaProjects/DayAndNight/land_shallow_topo_2048.jpg/")); // Directory of the image.
-        BufferedImage newimg2 = ImageIO.read(new File("/Users/shafihaque/IdeaProjects/DayAndNight/land_shallow_topo_2048.jpg/"));
+        }
 
         filter1 = new DayNightFilter1(widthOfImage, heightOfImaage, 0); // Filter is used for the equation day and night.
 
 
         JLabel thumb = new JLabel();
-        thumb.setIcon(new ImageIcon(newimg2)); //Thumb is the jlabel where the map is set onto.
+        thumb.setIcon(new ImageIcon(finImg)); //Thumb is the jlabel where the map is set onto.
 
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 12)); // This 1 by 12 grid layout. 12 elements such as button below.
+        panel.setLayout(new GridLayout(1, 11)); // This 1 by 12 grid layout. 12 elements such as button below.
 
 
-        JTextField hour = new JTextField(); // Textfield is used for hour, minute and seconds.
         JTextField minute = new JTextField();
         JTextField seconds = new JTextField();
+        JTextField hour = new JTextField();
 
 
         JDateChooser selectDate = new JDateChooser(); // All the buttons and checkboxes are created here.
@@ -50,7 +56,26 @@ class DayAndNight {
         JCheckBox refresh = new JCheckBox("Update Automatically");
         JCheckBox animateRefresh = new JCheckBox("Animate Automatically");
         JButton animate = new JButton("Animate");
-        changeDate listener = new changeDate(selectDate, thumb, hour, minute, seconds, selectDate, widthOfImage, heightOfImaage);
+
+        String[] hours={"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
+        JComboBox hoursCombo = new JComboBox(hours);
+
+        String[] minutes= new String[61];
+        for (int i=0;i<=60;i++){
+            minutes[i]=Integer.toString(i);
+        }
+        JComboBox minutesCombo = new JComboBox(minutes);
+
+        String[] second= new String[61];
+        for (int i=0;i<=60;i++){
+            second[i]=Integer.toString(i);
+        }
+        JComboBox secondsCombo = new JComboBox(second);
+
+        String[] ampm = {"am","pm"};
+        JComboBox ampmCombo = new JComboBox(ampm);
+
+        changeDate listener = new changeDate(selectDate, thumb, hour, minute, seconds, selectDate, widthOfImage, heightOfImaage, hoursCombo, minutesCombo, secondsCombo, ampmCombo);
 
 
         selectButton.addActionListener(listener); // The listener for the buttons.
@@ -62,13 +87,18 @@ class DayAndNight {
         refresh.addActionListener(listener2);
         animateRefresh.addActionListener(listener2);
 
+
+
+
         panel.add(selectDate); // The calendar
-        panel.add(hour);
-        panel.add(new JLabel("Hour")); //Everything is added to the Jframe panel here.
-        panel.add(minute);
-        panel.add(new JLabel("Minute"));
-        panel.add(seconds);
-        panel.add(new JLabel("Seconds"));
+        panel.add(new JLabel("am/pm", SwingConstants.RIGHT));
+        panel.add(ampmCombo);
+        panel.add(new JLabel("Hour",SwingConstants.RIGHT)); //Everything is added to the Jframe panel here.
+        panel.add(hoursCombo);
+        panel.add(new JLabel("Minute", SwingConstants.RIGHT));
+        panel.add(minutesCombo);
+        panel.add(new JLabel("Seconds",SwingConstants.RIGHT));
+        panel.add(secondsCombo);
         panel.add(selectButton);
         panel.add(animate);
         panel.add(animateRefresh);
@@ -81,6 +111,7 @@ class DayAndNight {
         frame.pack(); // Packs everything.
         frame.show();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // The program stops running when the window is closed.
+        currentButton.doClick();
 
         while(true) { // The loop used to detect if the checkboxes are clicked.
 
@@ -88,7 +119,7 @@ class DayAndNight {
 
                 currentButton.doClick(); // Performs a click action for the current button.
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1000); // To refresh for every second of the program.
                 } catch(InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }

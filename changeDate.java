@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,8 +26,12 @@ class changeDate implements ActionListener { // This action listener is used for
     JDateChooser selectDate1;
     int widthOfImage1;
     int heightOfImage1;
+    JComboBox hoursCombo1;
+    JComboBox minutesCombo1;
+    JComboBox secondsCombo1;
+    JComboBox ampmCombo1;
 
-    changeDate(JDateChooser userDate, JLabel thumb, JTextField hour, JTextField minute, JTextField seconds, JDateChooser selectDate, int widthOfImage, int heightOfImage) {
+    changeDate(JDateChooser userDate, JLabel thumb, JTextField hour, JTextField minute, JTextField seconds, JDateChooser selectDate, int widthOfImage, int heightOfImage, JComboBox hoursCombo, JComboBox minutesCombo, JComboBox secondsCombo, JComboBox ampmCombo) {
         userDate1 = userDate; // Initializes all of the variables base on the listener.
         thumb1 = thumb;
         hour1 = hour;
@@ -35,19 +40,43 @@ class changeDate implements ActionListener { // This action listener is used for
         selectDate1 = selectDate;
         widthOfImage1 = widthOfImage;
         heightOfImage1 = heightOfImage;
+        hoursCombo1 = hoursCombo;
+        minutesCombo1 = minutesCombo;
+        secondsCombo1 = secondsCombo;
+        ampmCombo1 = ampmCombo;
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Enter")) { // If the user enters the "Enter" jButton. This is a action listener after the user inputs the date and time.
 
             try { // This makes sure that the image is unchanged.
-                newimg21 = ImageIO.read(new File("/Users/shafihaque/IdeaProjects/DayAndNight/land_shallow_topo_2048.jpg/"));
+                newimg21 = ImageIO.read(new FileInputStream("resources/land_shallow_topo_2048.jpg/"));
             } catch (IOException err) {
                 err.printStackTrace();
-
             }
             DayNightFilter1 filter1 = DayAndNight.filter1; // Initializes the filter.
             Calendar temp = userDate1.getCalendar(); // Gets the calendar from the JDateChooser, which how the user inputs the date.
-            Calendar temp2 = new GregorianCalendar(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), temp.get(Calendar.DATE), Integer.parseInt(hour1.getText().trim()), Integer.parseInt(minute1.getText().trim()), Integer.parseInt(seconds1.getText().trim()));
+
+            JComboBox ampm1 = hoursCombo1;
+            String ampm1S= (String)ampm1.getSelectedItem();
+
+
+            JComboBox hr1 = hoursCombo1;
+            String hr1S= (String)hr1.getSelectedItem();
+            int hr1I=Integer.parseInt(hr1S);
+            if (ampm1S.equals("pm")){
+                hr1I=hr1I+12;
+            }
+
+            JComboBox min1 = minutesCombo1;
+            String min1S= (String)min1.getSelectedItem();
+            int minI=Integer.parseInt(min1S);
+
+            JComboBox sec1 = secondsCombo1;
+            String sec1S= (String)sec1.getSelectedItem();
+            int secI=Integer.parseInt(sec1S);
+
+
+            Calendar temp2 = new GregorianCalendar(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), temp.get(Calendar.DATE), hr1I, minI, secI);
             filter1.updateWidthTable(temp2); // This sends the calendar to the equation where it gets the y value for the curve.
             for (int i = 0; i < widthOfImage1; i++) { // First loop for all of the width value.
                 for (int j = filter1.wtab_[i]; j < heightOfImage1; j++) { // Second loop starts at the y value for the curve. Ends at the height of the image, which is bottom of the image.
@@ -61,18 +90,26 @@ class changeDate implements ActionListener { // This action listener is used for
         }
         if (e.getActionCommand().equals("Current")) { // If the user enters the "Current" jButton. This shows the current date and time.
             try { // This makes sure that the image is unchanged.
-                newimg21 = ImageIO.read(new File("/Users/shafihaque/IdeaProjects/DayAndNight/land_shallow_topo_2048.jpg/"));
+                newimg21 = ImageIO.read(new FileInputStream("resources/land_shallow_topo_2048.jpg/"));
             } catch (IOException err) {
                 err.printStackTrace();
-
             }
             DayNightFilter1 filter1 = DayAndNight.filter1; // Initializes the filter.
 
             Calendar getCurrentCal = Calendar.getInstance(); // getInstance is used to get the current date and time.
+
+            int hourInampm = getCurrentCal.get(Calendar.HOUR_OF_DAY);
+            if (hourInampm>12){
+                hourInampm = hourInampm-12;
+                ampmCombo1.setSelectedItem("pm");
+            }
+
+
             selectDate1.setCalendar(getCurrentCal); // Sets the JDateChooser to the current date, so the user can see the current date.
-            hour1.setText(Integer.toString(getCurrentCal.get(Calendar.HOUR_OF_DAY))); // Gets the hour minute and second.
-            minute1.setText(Integer.toString(getCurrentCal.get(Calendar.MINUTE)));
-            seconds1.setText(Integer.toString(getCurrentCal.get(Calendar.SECOND)));
+            hoursCombo1.setSelectedItem(Integer.toString(hourInampm)); // Gets the hour minute and second.
+            minutesCombo1.setSelectedItem(Integer.toString(getCurrentCal.get(Calendar.MINUTE)));
+            secondsCombo1.setSelectedItem(Integer.toString(getCurrentCal.get(Calendar.SECOND)));
+
 
             filter1.updateWidthTable(); // updateWidthTable without parameter means it gets the current date and time.
             for (int i = 0; i < widthOfImage1; i++) { // Same algorithm as the "Enter" JButton above.
@@ -86,14 +123,16 @@ class changeDate implements ActionListener { // This action listener is used for
             thumb1.setIcon(new ImageIcon(newimg21));
         }
         if (e.getActionCommand().equals("Animate")) { // If the user enters the "Animate" jButton. // This showcases the animation fo the program.
-            clicks++; // Keeps track of the number of times the user enters the animate button.
-            System.out.println(clicks);
+
             try { // This makes sure that the image is unchanged.
-                newimg21 = ImageIO.read(new File("/Users/shafihaque/IdeaProjects/DayAndNight/land_shallow_topo_2048.jpg/"));
+                newimg21 = ImageIO.read(new FileInputStream("resources/land_shallow_topo_2048.jpg/"));
             } catch (IOException err) {
                 err.printStackTrace();
-
             }
+
+            clicks++; // Keeps track of the number of times the user enters the animate button.
+            System.out.println(clicks);
+
             DayNightFilter1 filter1 = DayAndNight.filter1; // Initializes the filter.
 
             Calendar testTime = new GregorianCalendar(2013, 1, 28, clicks, 24, 56); // This is a time randomly chosen to showcase the animation of the program.
