@@ -46,7 +46,7 @@ class changeDate implements ActionListener { // This action listener is used for
         if (e.getActionCommand().equals("Enter")) { // If the user enters the "Enter" jButton. This is a action listener after the user inputs the date and time.
 
             try { // This makes sure that the image is unchanged.
-                newimg21 = ImageIO.read(new File("land_shallow_topo_2048.jpg/"));
+                newimg21 = ImageIO.read(new File("earth.jpg/"));
             } catch (IOException err) {
                 err.printStackTrace();
             }
@@ -84,7 +84,7 @@ class changeDate implements ActionListener { // This action listener is used for
         }
         if (e.getActionCommand().equals("Current")) { // If the user enters the "Current" jButton. This shows the current date and time.
             try { // This makes sure that the image is unchanged.
-                newimg21 = ImageIO.read(new File("land_shallow_topo_2048.jpg/"));
+                newimg21 = ImageIO.read(new File("earth.jpg/"));
             } catch (IOException err) {
                 err.printStackTrace();
             }
@@ -115,7 +115,7 @@ class changeDate implements ActionListener { // This action listener is used for
         if (e.getActionCommand().equals("Animate")) { // If the user enters the "Animate" jButton. // This showcases the animation fo the program.
 
             try { // This makes sure that the image is unchanged.
-                newimg21 = ImageIO.read(new File("land_shallow_topo_2048.jpg/"));
+                newimg21 = ImageIO.read(new File("earth.jpg/"));
             } catch (IOException err) {
                 err.printStackTrace();
             }

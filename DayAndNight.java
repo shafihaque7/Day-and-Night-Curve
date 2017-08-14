@@ -25,7 +25,7 @@ class DayAndNight {
         Container pane = frame.getContentPane();
 
         try { // This makes sure that the image is unchanged.
-            finImg = ImageIO.read(new File("land_shallow_topo_2048.jpg/"));
+            finImg = ImageIO.read(new File("earth.jpg/"));
         } catch (IOException err) {
             err.printStackTrace();
         }
