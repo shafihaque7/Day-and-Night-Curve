@@ -1,0 +1,13 @@
+Overview
+
+This program shows the day and night curve on a mercator projection of earth
+
+Installation
+
+Type javac -cp .:jcalendar-1.4.jar *.java
+Type java -cp .:jcalendar-1.4.jar DayAndNight
+
+Files Included
+
+1.DayAndNight.java	Main file
+2.DayNightFilter1.java	
