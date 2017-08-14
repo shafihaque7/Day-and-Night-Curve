@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
+import javax.swing.JComboBox;
 
 
 
@@ -26,10 +25,9 @@ class DayAndNight {
         Container pane = frame.getContentPane();
 
         try { // This makes sure that the image is unchanged.
-            finImg = ImageIO.read(new FileInputStream("resources/land_shallow_topo_2048.jpg/"));
+            finImg = ImageIO.read(new File("land_shallow_topo_2048.jpg/"));
         } catch (IOException err) {
             err.printStackTrace();
-
         }
 
         filter1 = new DayNightFilter1(widthOfImage, heightOfImaage, 0); // Filter is used for the equation day and night.
@@ -40,7 +38,7 @@ class DayAndNight {
 
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 11)); // This 1 by 12 grid layout. 12 elements such as button below.
+        panel.setLayout(new GridLayout(1, 10)); // This 1 by 12 grid layout. 12 elements such as button below.
 
 
         JTextField minute = new JTextField();
@@ -72,10 +70,8 @@ class DayAndNight {
         }
         JComboBox secondsCombo = new JComboBox(second);
 
-        String[] ampm = {"am","pm"};
-        JComboBox ampmCombo = new JComboBox(ampm);
 
-        changeDate listener = new changeDate(selectDate, thumb, hour, minute, seconds, selectDate, widthOfImage, heightOfImaage, hoursCombo, minutesCombo, secondsCombo, ampmCombo);
+        changeDate listener = new changeDate(selectDate, thumb, hour, minute, seconds, selectDate, widthOfImage, heightOfImaage, hoursCombo, minutesCombo, secondsCombo);
 
 
         selectButton.addActionListener(listener); // The listener for the buttons.
@@ -91,8 +87,6 @@ class DayAndNight {
 
 
         panel.add(selectDate); // The calendar
-        panel.add(new JLabel("am/pm", SwingConstants.RIGHT));
-        panel.add(ampmCombo);
         panel.add(new JLabel("Hour",SwingConstants.RIGHT)); //Everything is added to the Jframe panel here.
         panel.add(hoursCombo);
         panel.add(new JLabel("Minute", SwingConstants.RIGHT));
@@ -129,7 +123,7 @@ class DayAndNight {
             }
             else
             {
-                System.out.println("check auto is " + changeDate.checkAuto);
+                System.out.println("");
 
             }
 
