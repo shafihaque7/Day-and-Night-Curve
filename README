@@ -4,8 +4,13 @@ This program shows the day and night curve on a mercator projection of earth
 
 Installation
 
+On Unix(Mac and linux)
 Type javac -cp .:jcalendar-1.4.jar *.java
 Type java -cp .:jcalendar-1.4.jar DayAndNight
+
+On Windows
+Type javac -cp .;jcalendar-1.4.jar *.java
+Type java -cp .;jcalendar-1.4.jar DayAndNight
 
 Files Included
 
