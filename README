@@ -10,4 +10,8 @@ Type java -cp .:jcalendar-1.4.jar DayAndNight
 Files Included
 
 1.DayAndNight.java	Main file
-2.DayNightFilter1.java	
+2.DayNightFilter1.java	Contains the formula used to find the projection
+3.README 		The README file
+4.changeDate.java	Contains the action listeners
+5.jcalendar-1.4,java	The external jar used for this program
+6.earth.jpg		The image for this file	
