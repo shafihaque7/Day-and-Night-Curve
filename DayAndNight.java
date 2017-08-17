@@ -15,8 +15,13 @@ class DayAndNight {
 
     static BufferedImage finImg; // finImg and filter 1 are initialized in the main.
     static DayNightFilter1 filter1;
+    static String ifIntellij ="";
 
     public static void main(String[] args) throws IOException {
+        boolean onIntellij=false; // This shoould be false if its not on intellij.
+        if (onIntellij) {
+            ifIntellij = "src/";
+        }
         int widthOfImage = 2048; // Width and height of the image, it can be changed here if a different image is used.
         int heightOfImaage = 1024;
 
@@ -25,7 +30,7 @@ class DayAndNight {
         Container pane = frame.getContentPane();
 
         try { // This makes sure that the image is unchanged.
-            finImg = ImageIO.read(new File("earth.jpg/"));
+            finImg = ImageIO.read(new File(ifIntellij+"earth.jpg/"));
         } catch (IOException err) {
             err.printStackTrace();
         }
