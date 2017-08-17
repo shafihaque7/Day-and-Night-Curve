@@ -15,9 +15,6 @@ class changeDate implements ActionListener { // This action listener is used for
     private JDateChooser userDate1; // Declares all of the variables.
     private JLabel thumb1;
     private BufferedImage newimg21;
-    JTextField hour1;
-    JTextField minute1;
-    JTextField seconds1;
     JButton currentButton1;
     public static boolean checkAuto = false;
     public static boolean checkAnimate = false;
@@ -29,12 +26,9 @@ class changeDate implements ActionListener { // This action listener is used for
     JComboBox minutesCombo1;
     JComboBox secondsCombo1;
 
-    changeDate(JDateChooser userDate, JLabel thumb, JTextField hour, JTextField minute, JTextField seconds, JDateChooser selectDate, int widthOfImage, int heightOfImage, JComboBox hoursCombo, JComboBox minutesCombo, JComboBox secondsCombo) {
+    changeDate(JDateChooser userDate, JLabel thumb, JDateChooser selectDate, int widthOfImage, int heightOfImage, JComboBox hoursCombo, JComboBox minutesCombo, JComboBox secondsCombo) {
         userDate1 = userDate; // Initializes all of the variables base on the listener.
         thumb1 = thumb;
-        hour1 = hour;
-        minute1 = minute;
-        seconds1 = seconds;
         selectDate1 = selectDate;
         widthOfImage1 = widthOfImage;
         heightOfImage1 = heightOfImage;

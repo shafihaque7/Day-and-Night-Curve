@@ -41,10 +41,6 @@ class DayAndNight {
         panel.setLayout(new GridLayout(1, 10)); // This 1 by 12 grid layout. 12 elements such as button below.
 
 
-        JTextField minute = new JTextField();
-        JTextField seconds = new JTextField();
-        JTextField hour = new JTextField();
-
 
         JDateChooser selectDate = new JDateChooser(); // All the buttons and checkboxes are created here.
         JButton selectButton = new JButton("Enter");
@@ -71,7 +67,7 @@ class DayAndNight {
         JComboBox secondsCombo = new JComboBox(second);
 
 
-        changeDate listener = new changeDate(selectDate, thumb, hour, minute, seconds, selectDate, widthOfImage, heightOfImaage, hoursCombo, minutesCombo, secondsCombo);
+        changeDate listener = new changeDate(selectDate, thumb, selectDate, widthOfImage, heightOfImaage, hoursCombo, minutesCombo, secondsCombo);
 
 
         selectButton.addActionListener(listener); // The listener for the buttons.
