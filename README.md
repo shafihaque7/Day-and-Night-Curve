@@ -1,8 +1,8 @@
-Overview
+**Overview
 
-This program shows the day and night curve on a mercator projection of earth
+This program shows the day and night curve on a mercator projection of earth. It uses java, awt, swing components.
 
-Installation
+**Installation
 
 On Unix(Mac and linux)
 Type javac -cp .:jcalendar-1.4.jar *.java
@@ -24,5 +24,5 @@ Files Included
 Video of the program: https://youtu.be/FUmOwpOYZUY
 Type java -cp .:jcalendar-1.4.jar DayAndNight
 
-![main](https://github.com/shafihaque7/DayandNightAndroid/blob/master/Screenshot_1.png)
+![main](https://github.com/shafihaque7/Day-and-Night-Curve/blob/master/Sample%20image%20of%20the%20program.png)
 
