@@ -24,3 +24,5 @@ Files Included
 Video of the program: https://youtu.be/FUmOwpOYZUY
 Type java -cp .:jcalendar-1.4.jar DayAndNight
 
+![main](https://github.com/shafihaque7/DayandNightAndroid/blob/master/Screenshot_1.png)
+
